@@ -111,14 +111,14 @@ def train_model_pytorch():
 
 
 def send_email():
-    sender = "giaoviendinhcong4@gmail.com"
-    recipient = "vinhduong227@gmail.com"
+    sender = "sender@gmail.com"
+    recipient = "recipient@gmail.com"
     attachment_file = "/home/vinh/vinh_python/air_flow/model/stockmodel.pt"
 
     ses = boto3.client('ses',
                        region_name='ap-southeast-1',
-                       aws_access_key_id='AKIATMQYMOPS5334X2MH',
-                       aws_secret_access_key='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')
+                       aws_access_key_id='key',
+                       aws_secret_access_key='key')
 
     subject = "Update model"
     body = f"model done : {datetime.now()}"
