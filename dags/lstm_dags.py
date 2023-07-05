@@ -116,7 +116,7 @@ def send_email():
     attachment_file = "/home/vinh/vinh_python/air_flow/model/stockmodel.pt"
 
     ses = boto3.client('ses',
-                       region_name='ap-southeast-1',  # Thay thế bằng region của bạn
+                       region_name='ap-southeast-1',
                        aws_access_key_id='AKIATMQYMOPS5334X2MH',
                        aws_secret_access_key='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')
 
@@ -128,23 +128,17 @@ def send_email():
     msg['From'] = sender
     msg['To'] = recipient
 
-    # Thêm nội dung email
     msg.attach(MIMEText(body, 'plain'))
 
-    # Đọc nội dung file đính kèm
     with open(attachment_file, 'rb') as f:
         attachment_data = f.read()
 
-    # Tạo đối tượng MIMEApplication để đính kèm file
     attachment = MIMEApplication(attachment_data)
 
-    # Đặt tên file đính kèm
     attachment.add_header('Content-Disposition', 'attachment', filename=attachment_file)
 
-    # Thêm file đính kèm vào email
     msg.attach(attachment)
 
-    # Gửi email
     response = ses.send_raw_email(
         Source=sender,
         Destinations=[recipient],
